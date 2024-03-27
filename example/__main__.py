@@ -5,7 +5,7 @@ import sys
 import uvicorn
 
 def serve() -> int:
-    uvicorn.run("example.app:app", host="127.0.0.1", port=3000, log_level="info", reload=True)
+    uvicorn.run("example.fapi:app", host="127.0.0.1", port=3000, log_level="info", reload=True)
     return 0
 
 

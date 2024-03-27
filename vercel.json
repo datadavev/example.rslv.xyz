@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [
+      {"src": "example/fapi.py", "use": "@vercel/python"}
+    ],
+    "routes": [
+      {"src": "/(.*)", "dest": "example/fapi.py"}
+    ],
+    "env": {
+      "APP_MODULE": "example.fapi:app"
+  }
+}

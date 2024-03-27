@@ -35,11 +35,13 @@ app.add_middleware(
     ],
 )
 
-def request_to_response(request: fastapi.Request) -> typing.Dict[str, typing.Any]:
+def request_to_response(request: fastapi.Request, path:str) -> typing.Dict[str, typing.Any]:
     response = {
         "url": request.url._url,
         "method": request.method,
-        "headers": request.headers
+        "path": path,
+        "query": request.query_params,
+        "headers": request.headers,
     }
     return response
 
@@ -47,14 +49,14 @@ def request_to_response(request: fastapi.Request) -> typing.Dict[str, typing.Any
 async def get_favicon():
     raise fastapi.HTTPException(status_code=404, detail="Not found")
 
-@app.get("/")
-def echo_get(request:fastapi.Request):
-    return request_to_response(request)
+@app.get("/{path:path}")
+def echo_get(request:fastapi.Request, path:str):
+    return request_to_response(request, path)
 
-@app.head("/")
-def echo_head(request:fastapi.Request):
-    return request_to_response(request)
+@app.head("/{path:path}")
+def echo_head(request:fastapi.Request, path:str):
+    return request_to_response(request, path)
 
-@app.post("/")
-def echo_post(request:fastapi.Request):
-    return request_to_response(request)
+@app.post("/{path:path}")
+def echo_post(request:fastapi.Request, path:str):
+    return request_to_response(request, path)
