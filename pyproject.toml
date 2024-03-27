@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "example-rslv-xyz"
+version = "0.1.0"
+description = "A HTTP reflection for testing purposes."
+authors = ["datadave <605409+datadavev@users.noreply.github.com>"]
+license = "GPL3"
+readme = "README.md"
+packages = [{include = "example"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.110.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+uvicorn = "^0.29.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry_bumpversion.file."example/__init__.py"]
+
+
+[tool.poetry.scripts]
+httpeg = 'example.__main__:main'
