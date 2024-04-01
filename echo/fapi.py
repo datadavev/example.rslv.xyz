@@ -50,12 +50,17 @@ app.add_middleware(
 
 
 def request_to_response(request: fastapi.Request, path:str) -> typing.Dict[str, typing.Any]:
+    headers = {}
+    for k,v in request.headers.items():
+        if not k.lower().startswith("x-vercel"):
+            headers[k] = v
+
     response = {
         "url": request.url._url,
         "method": request.method,
         "path": path,
         "query": request.query_params,
-        "headers": request.headers,
+        "headers": headers,
     }
     return response
 
